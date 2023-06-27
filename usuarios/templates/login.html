@@ -17,10 +17,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="contact-form-area">
-                    <form action="" method="post">
+                    <form action="{%url 'login'%}" method="post">
                         <div class="row">
                             <div class="col-12 col-lg-12">
-                                {%csrf_token%}
+                                {% csrf_token %}
                                 <label for="email"><b>E-mail</b></label>
                                 <input type="text" name="email" class="form-control" name="email" placeholder="Informe seu email">
                             </div>

@@ -1,9 +1,65 @@
-{% extend 'base.html'%}
+{% extends 'base.html'%}
 
 {%block titulo%} Cadastro {%endblock%}
 
 {%block conteudo%}
 
-    <h1>CADASTRO</h1>
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2>Criar conta</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area">
+                    <form action="{%url 'cadastro'%}" method="post">
+
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                {% csrf_token %}
+                                <label for="nome"><b>Nome completo</b></label>
+                                <input type="text" name="nome" id="nome" class="form-control"  placeholder="ex. leo serafim"required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <label for="email"><b>E-mail</b></label>
+                                <input type="email" name="email" id="email" class="form-control"  placeholder="ex. leoserafim@email.com"required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <label for="senha"><b>Senha</b></label>
+                                <input type="password" name="senha" id="senha" class="form-control"  placeholder="informe sua senha"required>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="senha2"><b>Confirme sua senha</b></label>
+                                <input type="password" name="senha2" id="senha2" class="form-control"  placeholder="confirme sua senha"required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-sucess">Criar sua conta</button>
+                                <button type="submit" class="btn btn-danger" onclick="cancelar()">Cancelar cadastro</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<script>
+    function cancelar(){
+        location.href="{% url 'index'%}"
+    }
+</script>
 
 {%endblock%}
