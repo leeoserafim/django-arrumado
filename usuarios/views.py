@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-
+from churras.models import Prato
 # Create your views here.
 def cadastro(request):
     # print(f'Method: {request.method}')
@@ -60,9 +60,20 @@ def login(request):
     
 
 def dashboard(request):
+    if request.user.is_authenticated:
+        pratos= Prato.objects.filter(publicado=True).order_by('-date_prato')
+        contexto = {
+        'lista_pratos' : pratos,
+        }
+        return render (request,'dashboard.html')
     return render(request,'dashboard.html')
 
 def logout(request):
     auth.logout(request)
     print('Voce realizou o logout')
     return redirect ('index')
+
+
+def criar_prato(request):
+    ...
+    return render(request,'criar_prato.html')
