@@ -19,7 +19,7 @@
         <div class="col-12 col-sm-6 col-lg-4">
             <div class="single-best-receipe-area mb-30">
                 {% if prato.foto_prato %}
-                    <img scr="{{ prato.foto_prato.url }}">
+                    <img src="{{ prato.foto_prato.url }}" alt="">
                 {% else %}
                     <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
                 {% endif %}
@@ -28,6 +28,8 @@
                         <h5>{{ prato.nome_prato }}</h5>
                         <h6>{{ prato.categoria }}</h6>
                     </a>
+                    <a href="{% url 'deleta_prato' prato.id %}" type="button" class=" 'btn btn-danger"> Apagar</a>
+                    <a href="{% url 'edita_prato' prato.id %}" type="button" class=" 'btn btn-info"> EDITAR</a>
                 </div>
             </div>
         </div>

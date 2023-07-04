@@ -71,7 +71,7 @@ def dashboard(request):
         contexto = {
         'lista_pratos' : pratos,
         }
-        return render (request,'dashboard.html')
+        return render (request,'dashboard.html', contexto)
     messages.error(request,'Voce nao tem permissão para acessar o dashboard.')
     return render(request,'dashboard.html')
 def logout(request):
@@ -86,9 +86,70 @@ def criar_prato(request):
             ingredientes=request.POST['ingredientes']
             modo_preparo=request.POST['modo_preparo']
             tempo_preparo=request.POST['tempo_preparo']
-            rendimento=request.POST['redimento']
+            rendimento=request.POST['rendimento']
             categoria=request.POST['categoria']
             foto_prato=request.FILES['foto_prato']
+            user = get_object_or_404(User,pk=request.user.id)
+            prato=Prato.objects.create(pessoa=user, nome_prato=nome_prato,ingredientes=ingredientes, modo_preparo=modo_preparo,tempo_preparo=tempo_preparo, rendimento=rendimento,categoria=categoria,foto_prato=foto_prato )
+            prato.save()
+            print("prato criado com sucesso")
+            return redirect('dashboard')
+        return render(request,'criar_prato.html')
+    
+    messages.error(request,'Voce nao tem permissão para criar pratos.')
+    return redirect ('index')
+
+def deleta_prato(request, prato_id):
+    #print(f'\n\n Entrou em deleta_prato. Excluir {prato_id}')
+    try:
+        prato = get_object_or_404(Prato, pk=prato_id)
+    
+    except:
+        messages.error(request,'Prato não existente')
+        return redirect ('dashboard')
+    
+    prato.delete()
+    messages.success(request,'Prato apagado com sucesso')
+    return redirect('dashboard')
+
+def edita_prato(request, prato_id):
+    try:
+        prato = get_object_or_404(Prato, pk=prato_id)
+    
+    except:
+        messages.error(request,'Prato não existente')
+        return redirect ('dashboard')
+    
+    contexto = {
+        'prato' : prato,
+        }
+    return render (request,'edita_prato.html', contexto)
+
+def atualiza_prato(request):
+     if request.user.is_authenticated:
+        if request.method == 'POST':
+            #RECUPERAR DADOS DO FORMULARIO
+            prato_id=request.POST['']
+            nome_prato=request.POST['nome_prato']
+            ingredientes=request.POST['ingredientes']
+            modo_preparo=request.POST['modo_preparo']
+            tempo_preparo=request.POST['tempo_preparo']
+            rendimento=request.POST['rendimento']
+            categoria=request.POST['categoria']
+            foto_prato=request.FILES['foto_prato']
+
+            prato=Prato.objects.get(pk=prato_id)
+
+            prato.nome_prato=nome_prato
+            prato.ingredientes=ingredientes
+            prato.modo_preparo=modo_preparo
+            prato.tempo_preparo=tempo_preparo
+            prato.rendimento=rendimento
+            prato.categoria=categoria
+             if 'foto_prato' in request.FILES:
+                prato.foto_prato=request.FILES['foto_prato'] 
+
+
             user = get_object_or_404(User,pk=request.user.id)
             prato=Prato.objects.create(pessoa=user, nome_prato=nome_prato,ingredientes=ingredientes, modo_preparo=modo_preparo,tempo_preparo=tempo_preparo, rendimento=rendimento,categoria=categoria,foto_prato=foto_prato )
             prato.save()

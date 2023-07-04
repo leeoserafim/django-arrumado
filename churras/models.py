@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-from pessoas.models import Pessoa
+# from pessoas.models import Pessoa
 from django.contrib.auth.models import User
 # Create your models here.
 # Esta classe de models se tornara uma tabela no banco de dados
@@ -41,3 +41,4 @@ class Prato(models.Model):
     class Meta:
        verbose_name='Prato'
        verbose_name_plural = 'Pratos'
+       

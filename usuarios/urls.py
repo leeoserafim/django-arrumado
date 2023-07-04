@@ -9,4 +9,7 @@ urlpatterns = [
     path('dashboard/',views.dashboard , name='dashboard'),
     path('logout/',views.logout , name='logout'),
     path('criar/prato',views.criar_prato , name='criar_prato'),
+    path('deleta/<int:prato_id>',views.deleta_prato, name='deleta_prato'),
+    path('edita/<int:prato_id>',views.edita_prato, name='edita_prato'),
+    path('atualiza_prato/<int:prato_id>',views.atualiza_prato, name='atualiza_prato'),
 ]
