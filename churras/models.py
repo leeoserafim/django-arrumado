@@ -5,6 +5,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 # Esta classe de models se tornara uma tabela no banco de dados
 class Prato(models.Model):
+    CATEGORIA_CHOICE=(
+       ('Churrasco','Churasco'),
+       ('Entrada','Entrada'),
+       ('Sobremesa','Sobremesa'),
+    )
     #serão os campos da tabela (atributos da classe)
     pessoa = models.ForeignKey(User, on_delete=models.CASCADE)
     nome_prato = models.CharField(
@@ -25,6 +30,7 @@ class Prato(models.Model):
     )
     categoria = models.CharField(max_length=100,
         verbose_name='Categoria',
+        choices=CATEGORIA_CHOICE,
     )
     date_prato = models.DateField(
         default=datetime.now, blank=True

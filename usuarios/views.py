@@ -146,7 +146,7 @@ def atualiza_prato(request):
             prato.tempo_preparo=tempo_preparo
             prato.rendimento=rendimento
             prato.categoria=categoria
-             if 'foto_prato' in request.FILES:
+            if 'foto_prato' in request.FILES:
                 prato.foto_prato=request.FILES['foto_prato'] 
 
 
@@ -157,5 +157,5 @@ def atualiza_prato(request):
             return redirect('dashboard')
         return render(request,'criar_prato.html')
     
-    messages.error(request,'Voce nao tem permissão para criar pratos.')
-    return redirect ('index')
+     messages.error(request,'Voce nao tem permissão para criar pratos.')
+     return redirect ('index')

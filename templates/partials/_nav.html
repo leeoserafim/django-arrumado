@@ -28,6 +28,11 @@
                                     <li><a href="{% url 'index' %}">Home</a></li>
                                     <li><a href="{% url 'dashboard' %}">Meus Pratos</a></li>
                                     <li><a href="{% url 'criar_prato' %}">Criar pratos</a></li>
+                                    {%if user.is_superuser%}
+                                        <li><a href="{% url 'admin:index' %}" target="_blank">Admin</a></li>
+                                    {%endif%}
+
+
                                     <li><a href="{% url 'logout' %}">logout</a></li>
 
                                 {% else %}
