@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7w)gz+edulnfev#z8lzw=l@7dmr$ma!nq8ng7)wmdd#030+wbs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://canes-grilleo.onrender.com','*']
 
 
 # Application definition
